@@ -1354,7 +1354,8 @@ static int jtagmkII_initialize(PROGRAMMER * pgm, AVRPART * p)
     AVRMEM *bootmem = avr_locate_mem(p, "boot");
     AVRMEM *flashmem = avr_locate_mem(p, "flash");
     if (bootmem == NULL || flashmem == NULL) {
-      avrdude_message(MSG_INFO, "%s: jtagmkII_initialize(): Cannot locate \"flash\" and \"boot\" memories in description\n",
+      //For many part definitions this message is now spurious, don't show it unless in level 2 verbose mode, so it won't be shown normally, even with
+      avrdude_message(MSG_NOTICE2, "%s: jtagmkII_initialize(): Cannot locate \"flash\" and \"boot\" memories in description\n",
                       progname);
     } else {
       if (PDATA(pgm)->fwver < 0x700) {
